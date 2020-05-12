@@ -1,25 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Following setup from:
 
-Things you may want to cover:
+https://open.appacademy.io/learn/full-stack-online/rails/rspec-and-rails-setup
+https://open.appacademy.io/learn/full-stack-online/rails/testing-with-capybara
+https://open.appacademy.io/learn/full-stack-online/rails/shoulda-matchers-setup
+https://open.appacademy.io/learn/full-stack-online/rails/spring-and-guard-setup
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+This is going to be a demo of test driven development on a goals app. 
 
 * ...
 # Tasker
