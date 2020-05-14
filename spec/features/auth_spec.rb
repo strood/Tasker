@@ -11,15 +11,10 @@ feature 'the signup process' do
   end
 
   feature 'signing up a user' do
-    before(:each) do
-        visit new_user_url
-        fill_in 'Username:', :with => "Username"
-        fill_in 'Password:', :with => "good_password"
-        click_on 'Create User'
-    end
 
     scenario 'shows username on the homepage after signup' do
-      expect(page).to have_content("User Page")
+      sign_up_as("Cool Username")
+      expect(page).to have_content("Cool Username")
     end
 
 
@@ -29,30 +24,28 @@ end
 
 
 feature 'logging in' do
-  before(:each) do
-    visit new_session_url
-    fill_in 'Username:', :with => "Username"
-    fill_in 'Password:', :with => "good_password"
-    click_on "Sign In"
-  end
+  given!(:hello_world) { FactoryBot.create(:user_hw) }
 
   scenario 'shows usename on the homepage after login' do
-    expect(page).to have_content "Username"
+    login_as(hello_world)
+    expect(page).to have_content "hello_world"
   end
 end
 
 
 feature 'logging out' do
+  given!(:hello_world) { FactoryBot.create(:user_hw) }
+
   scenario 'begins with a logged out state' do
     visit root_url
     expect(page).to have_content "Log In"
   end
 
   # COuldnt get to work, diabling
-  # scenario 'doesn\'t show username on the homepage after logout' do
-  #
-  #   click_on 'Sign Out'
-  #   expect(page).not_to have_content "Hello, "
-  # end
+  scenario 'doesn\'t show username on the homepage after logout' do
+    login_as(hello_world)
+    click_button 'Sign Out'
+    expect(page).not_to have_content "Hello, hello_world"
+  end
 
 end
