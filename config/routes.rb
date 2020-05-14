@@ -5,5 +5,7 @@ Rails.application.routes.draw do
 
   resource :session, only: [:new, :create, :destroy]
 
+  resource :tasks, only: [:show, :new, :create, :destroy]
+
   root to: redirect('/session/new')
 end
