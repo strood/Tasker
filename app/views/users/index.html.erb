@@ -1,0 +1,10 @@
+<h1>All Users</h1>
+<% @user.each do %>
+
+  <p>
+    <a href="<%= user_url(user) %>">
+      <%= user.username %>
+    </a>
+  </p>
+
+<% end %>

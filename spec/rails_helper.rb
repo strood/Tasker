@@ -36,8 +36,8 @@ end
 
 
 RSpec.configure do |config|
-  # When adding the /support dir, and subsequent files, need to make note of them in the rails_helper.rb file so that rspec knows to include them as part of features. AND MUST UNCOMMENYT ABOVE LINE:
-  # Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+  # When adding the /support dir, and subsequent files, need to make note of them in the rails_helper.rb file so that rspec knows to include them as part of features. AND MUST UNCOMMENT ABOVE LINE:
+  # ""Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }""
   # Uncomment below lines when helpers added
   config.include AuthFeaturesHelper, type: :feature
   config.include TaskFeaturesHelper, type: :feature
