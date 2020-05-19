@@ -11,9 +11,9 @@
    end
 
    def make_three_tasks(user)
-     FactoryBot.create(:task, title: "walk the dog", author: user)
-     FactoryBot.create(:task, title: "kick the can", author: user)
-     FactoryBot.create(:task, title: "go to Mars", author: user)
+     FactoryBot.create(:task, title: "walk the dog", owner: user)
+     FactoryBot.create(:task, title: "kick the can", owner: user)
+     FactoryBot.create(:task, title: "go to Mars", owner: user)
    end
 
    def verify_three_tasks
