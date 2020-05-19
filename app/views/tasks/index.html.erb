@@ -1,0 +1,66 @@
+
+<h1>All Tasks</h1>
+
+<%= render "shared/errors" %>
+<%= render "shared/messages" %>
+
+<ul>
+<% @tasks.each do |task| %>
+  <li>
+    <%= task.title %>
+    <%= task.description %>
+    <% if task.private %>
+      <p>Private</p>
+      <% if task.owner == current_user %>
+      <form action="<%= task_url(task) %>" method="post">
+        <%= auth_token %>
+        <input type="hidden" name="_method" value="PATCH">
+        <input type="hidden" name="task[private]" value="false">
+        <input type="submit" name="submit" value="Public">
+      </form>
+      <% end %>
+    <% else %>
+      <p>Public</p>
+      <% if task.owner == current_user %>
+      <form action="<%= task_url(task) %>" method="post">
+        <%= auth_token %>
+        <input type="hidden" name="_method" value="PATCH">
+        <input type="hidden" name="task[private]" value="true">
+        <input type="submit" name="submit" value="Private">
+      </form>
+      <% end %>
+    <% end %>
+
+    <% if task.completed %>
+      <p>Completed</p>
+      <% if task.owner == current_user %>
+      <form action="<%= task_url(task) %>" method="post">
+        <%= auth_token %>
+        <input type="hidden" name="_method" value="PATCH">
+        <input type="hidden" name="task[completed]" value="false">
+        <input type="submit" name="submit" value="Incomplete">
+      </form>
+      <% end %>
+    <% else %>
+      <p>Ongoing</p>
+      <% if task.owner == current_user %>
+      <form action="<%= task_url(task) %>" method="post">
+        <%= auth_token %>
+        <input type="hidden" name="_method" value="PATCH">
+        <input type="hidden" name="task[completed]" value="true">
+        <input type="submit" name="submit" value="Completed">
+      </form>
+      <% end %>
+    <% end %>
+    <% if task.owner == current_user %>
+    <form action="<%= task_url(task) %>" method="post">
+      <%= auth_token %>
+      <input type="hidden" name="_method" value="DELETE">
+      <input type="hidden" name="task[completed]" value="true">
+      <input type="submit" name="submit" value="delete '<%= task.title %>' task">
+    </form>
+    <% end %>
+    <a href="<%= task_url(task) %>">Visit Task</a>
+  </li>
+<% end %>
+</ul>

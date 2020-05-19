@@ -1,0 +1,66 @@
+<% task_owner = current_user == @task.owner %>
+
+<h1>View Task</h1>
+
+<%= render "shared/errors" %>
+<%= render "shared/messages" %>
+
+<h2>Task Title: <%= @task.title %></h2>
+<h3>Task Owner: <%= @task.owner.username %></h3>
+<h3>Task Description:</h3>
+<p><%= @task.description %></p>
+<br>
+<h3>Task Type:</h3>
+<% if @task.private == true %>
+  <p>Private</p>
+  <% if task_owner %>
+  <form action="<%= task_url(@task) %>" method="post">
+    <%= auth_token %>
+    <input type="hidden" name="_method" value="PATCH">
+    <input type="hidden" name="task[private]" value="false">
+    <input type="submit" name="submit" value="Public">
+  </form>
+  <% end %>
+  <% else %>
+  <p>Public</p>
+  <% if task_owner %>
+  <form action="<%= task_url(@task) %>" method="post">
+    <%= auth_token %>
+    <input type="hidden" name="_method" value="PATCH">
+    <input type="hidden" name="task[private]" value="true">
+    <input type="submit" name="submit" value="Private">
+  </form>
+  <% end %>
+  <% end %>
+
+
+<h3>Task Status:</h3>
+<% if @task.completed %>
+  <p>Completed</p>
+  <% if task_owner %>
+  <form action="<%= task_url(@task) %>" method="post">
+    <%= auth_token %>
+    <input type="hidden" name="_method" value="PATCH">
+    <input type="hidden" name="task[completed]" value="false">
+    <input type="submit" name="submit" value="Incomplete">
+  </form>
+  <% end %>
+<% else %>
+  <p>Ongoing</p>
+  <% if task_owner %>
+  <form action="<%= task_url(@task) %>" method="post">
+    <%= auth_token %>
+    <input type="hidden" name="_method" value="PATCH">
+    <input type="hidden" name="task[completed]" value="true">
+    <input type="submit" name="submit" value="Completed">
+  </form>
+  <% end %>
+<% end %>
+
+<% if task_owner %>
+  <form action="<%= task_url(@task) %>" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <%= auth_token %>
+    <input type="submit" name="submit" value="delete '<%= @task.title %>' task">
+  </form>
+<% end %>

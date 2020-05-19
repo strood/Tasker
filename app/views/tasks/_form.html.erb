@@ -1,0 +1,43 @@
+<% if task.persisted?  %>
+  <% action_url = task_url(task) %>
+  <% button_text = "Update Task!" %>
+<% else %>
+  <% action_url = tasks_url %>
+  <% button_text = "Create Task!" %>
+<% end %>
+
+<form action="<%= action_url %>" method="post">
+  <%= auth_token %>
+
+  <% if task.persisted? %>
+    <input type="hidden" name="_method" value="PATCH">
+    <h2><%= @task.title %>:</h2>
+  <% end %>
+
+  <label for="title">Title:
+    <input type="text" name="task[title]" value="<%= task.title %>">
+  </label>
+
+  <br>
+
+  <label for="description">Description:
+    <textarea name="task[description]" rows="8" cols="80"><%= task.description %></textarea>
+  </label>
+
+  <br>
+
+  <label for="private">Private?:
+    <input type="checkbox" name="task[private]"
+    <%= 'checked="true"' if task.private %>>
+  </label>
+
+  <br>
+
+  <label for="completed">Completed?:</label>
+    <input type="checkbox" name="task[completed]"
+    <%= 'checked="true"' if task.completed %>>
+  <br>
+
+  <input type="submit" value="<%= button_text %>">
+
+</form>

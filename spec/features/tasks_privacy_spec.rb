@@ -33,7 +33,7 @@ feature "task privacy" do
 
     scenario "allows creating a private task" do
       login_as(hello_world)
-      visit task_url(private_goal)
+      visit task_url(private_task)
       expect(page).to have_content "Private"
     end
 

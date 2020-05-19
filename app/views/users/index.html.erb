@@ -1,5 +1,9 @@
 <h1>All Users</h1>
-<% @user.each do %>
+
+<%= render "shared/errors" %>
+<%= render "shared/messages" %>
+
+<% @users.each do |user| %>
 
   <p>
     <a href="<%= user_url(user) %>">

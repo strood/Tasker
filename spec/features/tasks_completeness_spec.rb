@@ -37,22 +37,22 @@ feature "task completeness tracking" do
     context "on the task show page" do
       scenario "allows user to change task to completed" do
         visit task_url(hw_task)
-        click_button "task_#{hw_task.id}_completed"
+        click_button "Completed"
         expect(page).to have_content("Complete")
       end
 
       scenario "redirects to the same page after updating task" do
         visit task_url(hw_task)
-        click_button "task_#{hw_task.id}_completed"
-        expect(page).to have_content("Task:")
+        click_button "Completed"
+        expect(page).to have_content("Task Title:")
         expect(page).to have_content("Title")
         expect(page).to have_content(hw_task.title)
       end
 
       scenario "disallows editing completeness when it is not your task" do
-        click_button "Log Out"
+        click_button "Sign Out"
         login_as(foo_bar)
-        visit task_urk(hw_task)
+        visit task_url(hw_task)
         expect(page).not_to have_content("Complete")
       end
 
@@ -61,34 +61,34 @@ feature "task completeness tracking" do
     context "on the task index page" do
       scenario "allows user to change task to completed" do
         visit tasks_url
-        click_button "task_#{hw_task.id}_completed"
+        click_button "Completed"
         expect(page).to have_content("Complete")
       end
 
       scenario "redirects to the same page after updating task" do
         visit tasks_url
-        click_button "task_#{hw_task.id}_completed"
-        expect(page).to have_content("Your Tasks")
+        click_button "Completed"
+        expect(page).to have_content("All Tasks")
       end
     end
 
     context "on the users profile page" do
       scenario "allows user to change task to completed" do
         visit user_url(hello_world)
-        click_button "task_#{hw_task.id}_completed"
+        click_button "Completed"
         expect(page).to have_content("Complete")
       end
 
       scenario "redirects to the same page after updating task" do
         visit user_url(hello_world)
-        click_button "task_#{hw_task.id}_completed"
+        click_button "Completed"
         expect(page).to have_content("Complete")
-        expect(page).to have_content("Hello_world's Profile")
-        expect(page).to have_content("Hello_world's Tasks:")
+        expect(page).to have_content("Hello, hello_world")
+        expect(page).to have_content("Your Tasks:")
       end
 
       scenario "disallows editing completeness when it is not your task" do
-        click_button "Log Out"
+        click_button "Sign Out"
         login_as(foo_bar)
         visit user_url(hello_world)
         expect(page).not_to have_button("Complete")

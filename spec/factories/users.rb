@@ -17,9 +17,9 @@ FactoryBot.define do
     factory :user_hw do
       username {"hello_world"}
     end
-  end
 
-  factory :user_foo do
-    username {"foo_bar"}
+    factory :user_foo do
+      username {"foo_bar"}
+    end
   end
 end

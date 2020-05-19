@@ -21,6 +21,8 @@ class ApplicationController < ActionController::Base
 
   # Before filters
 
+
+
   def require_current_user!
     redirect_to new_user_url unless current_user
   end
