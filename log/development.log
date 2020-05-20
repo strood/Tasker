@@ -11057,3 +11057,786 @@ Processing by TasksController#index as HTML
 Completed 200 OK in 35ms (Views: 31.4ms | ActiveRecord: 1.9ms)
 
 
+Started DELETE "/session" for 127.0.0.1 at 2020-05-20 15:39:45 -0600
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/strood/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.4.2/lib/active_record/log_subscriber.rb:98
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"+wS/tzLEHbroIdX/eCdN0UZZZ6WplZdylHZhmFXp8wk2gxVB/vT63Aw6NRRnaLX69NXVD/wGBipCxj310u/A5w==", "submit"=>"Sign Out"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "f1w0Iz_9VU9ZmEb32G4xcQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:46
+  [1m[36mUser Update (0.4ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "-hSvjRi740-EqB2a6zkv6A"], ["updated_at", "2020-05-20 21:39:45.798863"], ["id", 4]]
+  ↳ app/models/user.rb:46
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:46
+Redirected to http://localhost:3000/session/new
+Completed 302 Found in 33ms (ActiveRecord: 6.1ms)
+
+
+Started GET "/session/new" for 127.0.0.1 at 2020-05-20 15:39:45 -0600
+Processing by SessionsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.3ms)
+  Rendered shared/_messages.html.erb (0.3ms)
+  Rendered sessions/new.html.erb within layouts/application (3.4ms)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+Completed 200 OK in 213ms (Views: 209.6ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/session" for 127.0.0.1 at 2020-05-20 15:40:03 -0600
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"MI7f7PCY3DJunjLXVDeqJ8WBWmPIcGv/aUnV4YwFC779CXUaPKg7VIqF0jxLeFIMdw3oyZ3j+qe/+YmMCwM4UA==", "user"=>{"username"=>"Willy", "password"=>"[FILTERED]"}, "submit"=>"Log In"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "Willy"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:25
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:46
+  [1m[36mUser Update (0.5ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["updated_at", "2020-05-20 21:40:03.921930"], ["id", 4]]
+  ↳ app/models/user.rb:46
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:46
+Redirected to http://localhost:3000/users/4
+Completed 302 Found in 248ms (ActiveRecord: 2.6ms)
+
+
+Started GET "/users/4" for 127.0.0.1 at 2020-05-20 15:40:03 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:33
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendered shared/_errors.html.erb (0.3ms)
+  Rendered shared/_messages.html.erb (0.3ms)
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/views/users/show.html.erb:18
+  Rendered users/show.html.erb within layouts/application (26.0ms)
+Completed 200 OK in 44ms (Views: 36.3ms | ActiveRecord: 5.3ms)
+
+
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 15:42:02 -0600
+Processing by TasksController#index as HTML
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/models/task.rb:35
+  Rendering tasks/index.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.6ms)
+  Rendered shared/_messages.html.erb (0.4ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  Rendered tasks/index.html.erb within layouts/application (13.6ms)
+Completed 200 OK in 38ms (Views: 34.3ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 15:48:21 -0600
+Processing by TasksController#index as HTML
+Completed 500 Internal Server Error in 142ms (ActiveRecord: 0.0ms)
+
+
+
+NameError - undefined local variable or method `owner' for #<TasksController:0x00007ff3722839e0>:
+  app/controllers/tasks_controller.rb:7:in `index'
+
+Started POST "/__better_errors/2d05effd6aeda536/variables" for 127.0.0.1 at 2020-05-20 15:48:21 -0600
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 15:48:36 -0600
+Processing by TasksController#index as HTML
+Completed 500 Internal Server Error in 154ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `owner' for #<TasksController:0x00007ff371eb1560>:
+  app/controllers/tasks_controller.rb:7:in `index'
+
+Started POST "/__better_errors/408f862bc4b210b5/variables" for 127.0.0.1 at 2020-05-20 15:48:36 -0600
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 15:48:48 -0600
+Processing by TasksController#index as HTML
+  [1m[36mTask Load (0.9ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/models/task.rb:35
+  Rendering tasks/index.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.3ms)
+  Rendered shared/_messages.html.erb (0.3ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  Rendered tasks/index.html.erb within layouts/application (23.9ms)
+Completed 200 OK in 64ms (Views: 34.5ms | ActiveRecord: 14.1ms)
+
+
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 15:50:56 -0600
+Processing by TasksController#index as HTML
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/models/task.rb:35
+  Rendering tasks/index.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.3ms)
+  Rendered shared/_messages.html.erb (0.2ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  Rendered tasks/index.html.erb within layouts/application (23.2ms)
+Completed 200 OK in 59ms (Views: 41.2ms | ActiveRecord: 9.5ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-05-20 15:51:12 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendering users/index.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.4ms)
+  Rendered shared/_messages.html.erb (0.3ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:7
+  Rendered users/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 23ms (Views: 19.8ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 15:51:34 -0600
+Processing by TasksController#index as HTML
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/models/task.rb:35
+  Rendering tasks/index.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.3ms)
+  Rendered shared/_messages.html.erb (0.3ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:12
+  Rendered tasks/index.html.erb within layouts/application (10.5ms)
+Completed 200 OK in 28ms (Views: 24.5ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-05-20 15:52:32 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendering users/index.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.3ms)
+  Rendered shared/_messages.html.erb (0.3ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:7
+  Rendered users/index.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 29ms (Views: 19.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 15:52:35 -0600
+Processing by TasksController#index as HTML
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+
+
+
+ArgumentError - Call `select' with at least one field:
+  app/models/task.rb:35:in `all_public_tasks'
+  app/controllers/tasks_controller.rb:7:in `index'
+
+Started POST "/__better_errors/04a732fe02e23551/variables" for 127.0.0.1 at 2020-05-20 15:52:35 -0600
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 15:52:53 -0600
+Processing by TasksController#index as HTML
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/models/task.rb:35
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 4.7ms)
+
+
+
+NoMethodError - undefined method `include' for #<Array:0x00007ff3720cd4e8>
+Did you mean?  include?:
+  app/models/task.rb:35:in `all_public_tasks'
+  app/controllers/tasks_controller.rb:7:in `index'
+
+Started POST "/__better_errors/68995c0d6487104e/variables" for 127.0.0.1 at 2020-05-20 15:52:54 -0600
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 15:54:07 -0600
+Processing by TasksController#index as HTML
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" IN ($1, $2)[0m  [["id", nil], ["id", nil]]
+  ↳ app/models/task.rb:35
+Completed 404 Not Found in 10ms (ActiveRecord: 3.4ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find all Tasks with 'id': (all, {:include=>:owner}) (found 0 results, but was looking for 2).:
+  app/models/task.rb:35:in `all_public_tasks'
+  app/controllers/tasks_controller.rb:7:in `index'
+
+Started POST "/__better_errors/188e2ce5f492fff6/variables" for 127.0.0.1 at 2020-05-20 15:54:07 -0600
+Started GET "/users/new" for 127.0.0.1 at 2020-05-20 16:02:56 -0600
+Processing by UsersController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+Redirected to http://localhost:3000/users
+Filter chain halted as :require_no_current_user! rendered or redirected
+Completed 302 Found in 17ms (ActiveRecord: 4.8ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-05-20 16:02:56 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendering users/index.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.5ms)
+  Rendered shared/_messages.html.erb (0.5ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:7
+  Rendered users/index.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 30ms (Views: 28.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 16:03:02 -0600
+Processing by TasksController#index as HTML
+  [1m[35mSQL (1.4ms)[0m  [1m[34mSELECT "tasks"."id" AS t0_r0, "tasks"."user_id" AS t0_r1, "tasks"."title" AS t0_r2, "tasks"."description" AS t0_r3, "tasks"."private" AS t0_r4, "tasks"."completed" AS t0_r5, "tasks"."created_at" AS t0_r6, "tasks"."updated_at" AS t0_r7, "users"."id" AS t1_r0, "users"."username" AS t1_r1, "users"."session_token" AS t1_r2, "users"."password_digest" AS t1_r3, "users"."created_at" AS t1_r4, "users"."updated_at" AS t1_r5 FROM "tasks" LEFT OUTER JOIN "users" ON "users"."id" = "tasks"."user_id" ORDER BY created_at[0m
+  ↳ app/models/task.rb:36
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 2.7ms)
+
+
+
+ActiveRecord::StatementInvalid - PG::AmbiguousColumn: ERROR:  column reference "created_at" is ambiguous
+LINE 1: ...ers" ON "users"."id" = "tasks"."user_id" ORDER BY created_at
+                                                             ^
+: SELECT "tasks"."id" AS t0_r0, "tasks"."user_id" AS t0_r1, "tasks"."title" AS t0_r2, "tasks"."description" AS t0_r3, "tasks"."private" AS t0_r4, "tasks"."completed" AS t0_r5, "tasks"."created_at" AS t0_r6, "tasks"."updated_at" AS t0_r7, "users"."id" AS t1_r0, "users"."username" AS t1_r1, "users"."session_token" AS t1_r2, "users"."password_digest" AS t1_r3, "users"."created_at" AS t1_r4, "users"."updated_at" AS t1_r5 FROM "tasks" LEFT OUTER JOIN "users" ON "users"."id" = "tasks"."user_id" ORDER BY created_at:
+  app/models/task.rb:36:in `all_public_tasks'
+  app/controllers/tasks_controller.rb:7:in `index'
+
+Started POST "/__better_errors/0b05039d6f3a769c/variables" for 127.0.0.1 at 2020-05-20 16:03:02 -0600
+  [1m[35mSQL (2.0ms)[0m  [1m[34mSELECT  "tasks"."id" AS t0_r0, "tasks"."user_id" AS t0_r1, "tasks"."title" AS t0_r2, "tasks"."description" AS t0_r3, "tasks"."private" AS t0_r4, "tasks"."completed" AS t0_r5, "tasks"."created_at" AS t0_r6, "tasks"."updated_at" AS t0_r7, "users"."id" AS t1_r0, "users"."username" AS t1_r1, "users"."session_token" AS t1_r2, "users"."password_digest" AS t1_r3, "users"."created_at" AS t1_r4, "users"."updated_at" AS t1_r5 FROM "tasks" LEFT OUTER JOIN "users" ON "users"."id" = "tasks"."user_id" ORDER BY created_at LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ /home/strood/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.4.2/lib/active_record/log_subscriber.rb:98
+Started GET "/users/new" for 127.0.0.1 at 2020-05-20 16:05:03 -0600
+Processing by UsersController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+Redirected to http://localhost:3000/users
+Filter chain halted as :require_no_current_user! rendered or redirected
+Completed 302 Found in 21ms (ActiveRecord: 5.8ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-05-20 16:05:03 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendering users/index.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (1.0ms)
+  Rendered shared/_messages.html.erb (0.5ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:7
+  Rendered users/index.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 47ms (Views: 44.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 16:05:04 -0600
+Processing by TasksController#index as HTML
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+
+
+
+SyntaxError - syntax error, unexpected &
+    @tasks = Task.select(!&:private).eager_load(:owner)
+                          ^:
+  app/models/task.rb:35:in `'
+  app/controllers/tasks_controller.rb:7:in `index'
+
+Started POST "/__better_errors/99f72ed8b19894a4/variables" for 127.0.0.1 at 2020-05-20 16:05:05 -0600
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 16:05:27 -0600
+Processing by TasksController#index as HTML
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+
+
+
+TypeError - wrong argument type FalseClass (expected Proc):
+  app/models/task.rb:35:in `all_public_tasks'
+  app/controllers/tasks_controller.rb:7:in `index'
+
+Started POST "/__better_errors/27f339e2682137f7/variables" for 127.0.0.1 at 2020-05-20 16:05:27 -0600
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 16:05:34 -0600
+Processing by TasksController#index as HTML
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/models/task.rb:35
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 4.7ms)
+
+
+
+NoMethodError - undefined method `eager_load' for #<Array:0x00007ff370a884f8>:
+  app/models/task.rb:35:in `all_public_tasks'
+  app/controllers/tasks_controller.rb:7:in `index'
+
+Started POST "/__better_errors/a6a5eff44e08b9ff/variables" for 127.0.0.1 at 2020-05-20 16:05:34 -0600
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 16:07:32 -0600
+Processing by TasksController#index as HTML
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/models/task.rb:35
+Completed 404 Not Found in 17ms (ActiveRecord: 7.3ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Task with 'id'=private:
+  app/models/task.rb:35:in `all_public_tasks'
+  app/controllers/tasks_controller.rb:7:in `index'
+
+Started POST "/__better_errors/69e1b10422221042/variables" for 127.0.0.1 at 2020-05-20 16:07:32 -0600
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 16:07:57 -0600
+Processing by TasksController#index as HTML
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/models/task.rb:35
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 3.6ms)
+
+
+
+NoMethodError - undefined method `eager_load' for #<Task:0x00007ff371b1f848>:
+  app/models/task.rb:35:in `all_public_tasks'
+  app/controllers/tasks_controller.rb:7:in `index'
+
+Started POST "/__better_errors/dc6c0961443c091b/variables" for 127.0.0.1 at 2020-05-20 16:07:57 -0600
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 16:08:18 -0600
+Processing by TasksController#index as HTML
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/models/task.rb:35
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 3.8ms)
+
+
+
+NoMethodError - undefined method `include' for #<Task:0x00007ff37222f958>:
+  app/models/task.rb:35:in `all_public_tasks'
+  app/controllers/tasks_controller.rb:7:in `index'
+
+Started POST "/__better_errors/1a07b597b2e2af55/variables" for 127.0.0.1 at 2020-05-20 16:08:18 -0600
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 16:08:49 -0600
+Processing by TasksController#index as HTML
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/models/task.rb:35
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 3.3ms)
+
+
+
+NoMethodError - undefined method `includes' for #<Task:0x00007ff371fdd858>:
+  app/models/task.rb:35:in `all_public_tasks'
+  app/controllers/tasks_controller.rb:7:in `index'
+
+Started POST "/__better_errors/e813c1366c0bd93e/variables" for 127.0.0.1 at 2020-05-20 16:08:50 -0600
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 16:09:52 -0600
+Processing by TasksController#index as HTML
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+
+
+
+SyntaxError - syntax error, unexpected keyword_false, expecting keyword_end
+...: :desc).includes(:owner) false).includes(:owner)
+...                          ^~~~~:
+  app/models/task.rb:35:in `'
+  app/controllers/tasks_controller.rb:7:in `index'
+
+Started POST "/__better_errors/7ff3ea31c2c14ca4/variables" for 127.0.0.1 at 2020-05-20 16:09:53 -0600
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 16:10:07 -0600
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.6ms)
+  Rendered shared/_messages.html.erb (0.4ms)
+  [1m[36mTask Load (1.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" ORDER BY "tasks"."created_at" DESC[0m
+  ↳ app/views/tasks/index.html.erb:8
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4)[0m  [["id", 4], ["id", 3], ["id", 2], ["id", 1]]
+  ↳ app/views/tasks/index.html.erb:8
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendered tasks/index.html.erb within layouts/application (32.2ms)
+Completed 200 OK in 67ms (Views: 52.7ms | ActiveRecord: 8.7ms)
+
+
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 16:10:44 -0600
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.5ms)
+  Rendered shared/_messages.html.erb (0.5ms)
+  [1m[36mTask Load (0.8ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" ORDER BY "tasks"."created_at" DESC[0m
+  ↳ app/views/tasks/index.html.erb:8
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4)[0m  [["id", 4], ["id", 3], ["id", 2], ["id", 1]]
+  ↳ app/views/tasks/index.html.erb:8
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendered tasks/index.html.erb within layouts/application (12.3ms)
+Completed 500 Internal Server Error in 52ms (ActiveRecord: 2.9ms)
+
+
+
+ActionView::Template::Error - undefined method `username' for nil:NilClass:
+
+Started POST "/__better_errors/33cc584ea6d0beea/variables" for 127.0.0.1 at 2020-05-20 16:10:44 -0600
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 16:11:06 -0600
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.5ms)
+  Rendered shared/_messages.html.erb (0.5ms)
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" ORDER BY "tasks"."created_at" DESC[0m
+  ↳ app/views/tasks/index.html.erb:8
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4)[0m  [["id", 4], ["id", 3], ["id", 2], ["id", 1]]
+  ↳ app/views/tasks/index.html.erb:8
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendered tasks/index.html.erb within layouts/application (9.9ms)
+Completed 200 OK in 33ms (Views: 29.9ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-05-20 16:11:27 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendering users/index.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.5ms)
+  Rendered shared/_messages.html.erb (0.4ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:7
+  Rendered users/index.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 27ms (Views: 24.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/users/4" for 127.0.0.1 at 2020-05-20 16:11:33 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:33
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendered shared/_errors.html.erb (0.4ms)
+  Rendered shared/_messages.html.erb (0.4ms)
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/views/users/show.html.erb:18
+  Rendered users/show.html.erb within layouts/application (10.0ms)
+Completed 200 OK in 37ms (Views: 33.9ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 16:12:44 -0600
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.4ms)
+  Rendered shared/_messages.html.erb (0.3ms)
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" ORDER BY "tasks"."created_at" DESC[0m
+  ↳ app/views/tasks/index.html.erb:8
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4)[0m  [["id", 4], ["id", 3], ["id", 2], ["id", 1]]
+  ↳ app/views/tasks/index.html.erb:8
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendered tasks/index.html.erb within layouts/application (29.6ms)
+Completed 200 OK in 55ms (Views: 38.9ms | ActiveRecord: 9.4ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-05-20 16:12:48 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendering users/index.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (1.0ms)
+  Rendered shared/_messages.html.erb (0.5ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:7
+  Rendered users/index.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 24ms (Views: 21.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2020-05-20 16:12:51 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:33
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.4ms)
+
+
+
+NoMethodError - undefined method `include' for #<User:0x00007ff371bddfa0>:
+  app/controllers/users_controller.rb:33:in `show'
+
+Started POST "/__better_errors/0d7532343beef80f/variables" for 127.0.0.1 at 2020-05-20 16:12:52 -0600
+Started GET "/users/1" for 127.0.0.1 at 2020-05-20 16:13:13 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:33
+Completed 500 Internal Server Error in 28ms (ActiveRecord: 4.8ms)
+
+
+
+NoMethodError - undefined method `includes' for #<User:0x00007ff3721cfeb8>:
+  app/controllers/users_controller.rb:33:in `show'
+
+Started POST "/__better_errors/b4660cdde0811df9/variables" for 127.0.0.1 at 2020-05-20 16:13:13 -0600
+Started GET "/users/1" for 127.0.0.1 at 2020-05-20 16:13:31 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:33
+Completed 500 Internal Server Error in 22ms (ActiveRecord: 4.2ms)
+
+
+
+NoMethodError - undefined method `eager_load' for #<User:0x00007ff371e9b710>:
+  app/controllers/users_controller.rb:33:in `show'
+
+Started POST "/__better_errors/36912ac6af94e4d5/variables" for 127.0.0.1 at 2020-05-20 16:13:31 -0600
+Started GET "/users/1" for 127.0.0.1 at 2020-05-20 16:14:37 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:33
+Completed 500 Internal Server Error in 22ms (ActiveRecord: 4.5ms)
+
+
+
+NoMethodError - undefined method `includes' for #<User:0x00007ff3721c05f8>:
+  app/controllers/users_controller.rb:33:in `show'
+
+Started POST "/__better_errors/90fc56a0ccd55916/variables" for 127.0.0.1 at 2020-05-20 16:14:38 -0600
+Started GET "/users/1" for 127.0.0.1 at 2020-05-20 16:15:22 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:33
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendered shared/_errors.html.erb (0.4ms)
+  Rendered shared/_messages.html.erb (0.3ms)
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/models/task.rb:29
+  Rendered users/show.html.erb within layouts/application (18.0ms)
+Completed 200 OK in 49ms (Views: 31.5ms | ActiveRecord: 7.6ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2020-05-20 16:15:51 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:33
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendered shared/_errors.html.erb (0.4ms)
+  Rendered shared/_messages.html.erb (0.5ms)
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/models/task.rb:29
+  Rendered users/show.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 32ms (Views: 28.4ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-05-20 16:15:53 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendering users/index.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.8ms)
+  Rendered shared/_messages.html.erb (0.8ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:7
+  Rendered users/index.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 42ms (Views: 38.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/users/4" for 127.0.0.1 at 2020-05-20 16:15:54 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:33
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendered shared/_errors.html.erb (0.3ms)
+  Rendered shared/_messages.html.erb (0.4ms)
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/views/users/show.html.erb:18
+  Rendered users/show.html.erb within layouts/application (15.5ms)
+Completed 200 OK in 48ms (Views: 45.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/users/4" for 127.0.0.1 at 2020-05-20 16:17:13 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:33
+Completed 500 Internal Server Error in 22ms (ActiveRecord: 5.1ms)
+
+
+
+NoMethodError - undefined method `include' for #<User:0x00007ff3722514e0>:
+  app/controllers/users_controller.rb:33:in `show'
+
+Started POST "/__better_errors/bed101d47790a089/variables" for 127.0.0.1 at 2020-05-20 16:17:13 -0600
+Started GET "/users/4" for 127.0.0.1 at 2020-05-20 16:17:19 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:33
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 5.1ms)
+
+
+
+NoMethodError - undefined method `includes' for #<User:0x00007ff360054b68>:
+  app/controllers/users_controller.rb:33:in `show'
+
+Started POST "/__better_errors/dd08e0d68ae20f03/variables" for 127.0.0.1 at 2020-05-20 16:17:20 -0600
+Started GET "/users/4" for 127.0.0.1 at 2020-05-20 16:18:27 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:33
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.1ms)
+
+
+
+NoMethodError - undefined method `includes' for #<User:0x00007ff3719a7c68>:
+  app/controllers/users_controller.rb:33:in `show'
+
+Started POST "/__better_errors/ce770b0b225677d8/variables" for 127.0.0.1 at 2020-05-20 16:18:27 -0600
+Started GET "/users/4" for 127.0.0.1 at 2020-05-20 16:19:23 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:33
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/controllers/users_controller.rb:33
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendered shared/_errors.html.erb (0.3ms)
+  Rendered shared/_messages.html.erb (0.3ms)
+  Rendered users/show.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 43ms (Views: 19.3ms | ActiveRecord: 6.1ms)
+
+
+Started GET "/tasks/new" for 127.0.0.1 at 2020-05-20 16:20:36 -0600
+Processing by TasksController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.4ms)
+  Rendered shared/_messages.html.erb (0.6ms)
+  Rendered tasks/_form.html.erb (0.9ms)
+  Rendered tasks/new.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 27ms (Views: 24.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users/4" for 127.0.0.1 at 2020-05-20 16:20:48 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:33
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/controllers/users_controller.rb:33
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendered shared/_errors.html.erb (0.5ms)
+  Rendered shared/_messages.html.erb (0.4ms)
+  Rendered users/show.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 26ms (Views: 23.0ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/tasks/6" for 127.0.0.1 at 2020-05-20 16:20:58 -0600
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:11
+  Rendering tasks/show.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/tasks/show.html.erb:1
+  Rendered shared/_errors.html.erb (0.4ms)
+  Rendered shared/_messages.html.erb (0.3ms)
+  Rendered tasks/show.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 32ms (Views: 29.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 16:21:07 -0600
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.3ms)
+  Rendered shared/_messages.html.erb (0.2ms)
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" ORDER BY "tasks"."created_at" DESC[0m
+  ↳ app/views/tasks/index.html.erb:8
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4)[0m  [["id", 4], ["id", 3], ["id", 2], ["id", 1]]
+  ↳ app/views/tasks/index.html.erb:8
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendered tasks/index.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 23ms (Views: 21.0ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/tasks/1" for 127.0.0.1 at 2020-05-20 16:21:10 -0600
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:11
+  Rendering tasks/show.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/tasks/show.html.erb:1
+  Rendered shared/_errors.html.erb (0.3ms)
+  Rendered shared/_messages.html.erb (0.3ms)
+  Rendered tasks/show.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 23ms (Views: 19.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/users/4" for 127.0.0.1 at 2020-05-20 16:21:13 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:33
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/controllers/users_controller.rb:33
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendered shared/_errors.html.erb (0.4ms)
+  Rendered shared/_messages.html.erb (0.3ms)
+  Rendered users/show.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 27ms (Views: 22.9ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/tasks" for 127.0.0.1 at 2020-05-20 16:21:17 -0600
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.5ms)
+  Rendered shared/_messages.html.erb (0.4ms)
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" ORDER BY "tasks"."created_at" DESC[0m
+  ↳ app/views/tasks/index.html.erb:8
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4)[0m  [["id", 4], ["id", 3], ["id", 2], ["id", 1]]
+  ↳ app/views/tasks/index.html.erb:8
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "S75nv2gom2mQoO3yJhXqig"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+  Rendered tasks/index.html.erb within layouts/application (8.8ms)
+Completed 200 OK in 28ms (Views: 25.6ms | ActiveRecord: 1.1ms)
+
+

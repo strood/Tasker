@@ -26,13 +26,13 @@ class Task < ApplicationRecord
   end
 
   def self.find_public_by_user_id(id)
-    @tasks = Task.select { |task| task.user_id == id && !task.private}
+    @tasks = Task.select { |task| task.user_id == id && !task.private }
     return nil unless @tasks
     @tasks
   end
 
   def self.all_public_tasks
-    @tasks = Task.select { |task| !task.private }
+    @tasks = Task.order(created_at: :desc).includes(:owner)
     return nil unless @tasks
     @tasks
   end
