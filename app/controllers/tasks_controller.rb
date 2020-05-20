@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :require_current_user!
+  before_action :require_current_user!, except: [:index]
   # Need to deal with restrictions after
   # before_action :require_correct_user!, only: [:edit, :update, :delete]
 

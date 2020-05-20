@@ -8,5 +8,7 @@
 <div class="foot">
   <a href="<%= tasks_url %>">All Tasks</a>
   <a href="<%= users_url %>">All Users</a>
-  <a href="<%= user_url(current_user) %>">Your Page</a>
+  <% if current_user %>
+    <a href="<%= user_url(current_user) %>">Your Page</a>
+  <% end %>
 </div>
