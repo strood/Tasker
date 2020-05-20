@@ -3,12 +3,22 @@
 <%= render "shared/errors" %>
 <%= render "shared/messages" %>
 
-<% @users.each do |user| %>
+<ul>
+  <% @users.each do |user| %>
+  <li>
+    <p>
+      <a href="<%= user_url(user) %>">
+        <%= user.username %>
+      </a>
+    </p>
+  </li>
+  <% end %>
 
-  <p>
-    <a href="<%= user_url(user) %>">
-      <%= user.username %>
-    </a>
-  </p>
+</ul>
 
-<% end %>
+
+<div class="foot">
+  <a href="<%= tasks_url %>">All Tasks</a>
+  <a href="<%= users_url %>">All Users</a>
+  <a href="<%= user_url(current_user) %>">Your Page</a>
+</div>

@@ -4,63 +4,77 @@
 <%= render "shared/errors" %>
 <%= render "shared/messages" %>
 
-<ul>
+<ol>
 <% @tasks.each do |task| %>
   <li>
-    <%= task.title %>
-    <%= task.description %>
+    <p>Title: <%= task.title %></p>
+    <p>Description: <%= task.description %></p>
+    <p>Owner: <%= task.owner.username %></p>
+    <p>Type:
     <% if task.private %>
-      <p>Private</p>
+      Private
       <% if task.owner == current_user %>
       <form action="<%= task_url(task) %>" method="post">
         <%= auth_token %>
         <input type="hidden" name="_method" value="PATCH">
         <input type="hidden" name="task[private]" value="false">
-        <input type="submit" name="submit" value="Public">
+        <input type="submit" name="submit" value="Make Public">
       </form>
       <% end %>
     <% else %>
-      <p>Public</p>
+      Public
       <% if task.owner == current_user %>
       <form action="<%= task_url(task) %>" method="post">
         <%= auth_token %>
         <input type="hidden" name="_method" value="PATCH">
         <input type="hidden" name="task[private]" value="true">
-        <input type="submit" name="submit" value="Private">
+        <input type="submit" name="submit" value="Make Private">
       </form>
       <% end %>
     <% end %>
-
+    </p>
+    <p>Status:
     <% if task.completed %>
-      <p>Completed</p>
+      Completed
       <% if task.owner == current_user %>
       <form action="<%= task_url(task) %>" method="post">
         <%= auth_token %>
         <input type="hidden" name="_method" value="PATCH">
         <input type="hidden" name="task[completed]" value="false">
-        <input type="submit" name="submit" value="Incomplete">
+        <input type="submit" name="submit" value="Make Task Ongoing">
       </form>
       <% end %>
     <% else %>
-      <p>Ongoing</p>
+      Ongoing
       <% if task.owner == current_user %>
       <form action="<%= task_url(task) %>" method="post">
         <%= auth_token %>
         <input type="hidden" name="_method" value="PATCH">
         <input type="hidden" name="task[completed]" value="true">
-        <input type="submit" name="submit" value="Completed">
+        <input type="submit" name="submit" value="Complete Task">
       </form>
       <% end %>
     <% end %>
+    </p>
     <% if task.owner == current_user %>
     <form action="<%= task_url(task) %>" method="post">
       <%= auth_token %>
       <input type="hidden" name="_method" value="DELETE">
       <input type="hidden" name="task[completed]" value="true">
-      <input type="submit" name="submit" value="delete '<%= task.title %>' task">
+      <input type="submit" name="submit" value="Delete <%= task.title %> task">
     </form>
+    <br>
     <% end %>
     <a href="<%= task_url(task) %>">Visit Task</a>
+
   </li>
+  <br>
 <% end %>
-</ul>
+</ol>
+
+
+<div class="foot">
+  <a href="<%= tasks_url %>">All Tasks</a>
+  <a href="<%= users_url %>">All Users</a>
+  <a href="<%= user_url(current_user) %>">Your Page</a>
+</div>

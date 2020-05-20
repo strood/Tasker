@@ -8,7 +8,15 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  <h1>Tasker App</h1>
+  <% if current_user %>
+  <p>Welcome, <%= current_user.username %></p>
+  <form action="<%= session_url %>" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <%= auth_token %>
+      <input type="submit" name="submit" value="Sign Out">
+    </form>
+  <% end %>
   <body>
     <%= yield %>
   </body>

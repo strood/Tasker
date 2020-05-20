@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       render :new
     elsif @user.save
       login!(@user)
-      flash[:notice] = ["Welcome, #{ @user.username }, welcome to Tasker!"]
+      flash[:notice] = ["Hello, #{ @user.username }, welcome to Tasker!"]
       redirect_to user_url(@user)
     end
   end

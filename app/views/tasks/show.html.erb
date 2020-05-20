@@ -1,16 +1,16 @@
 <% task_owner = current_user == @task.owner %>
 
-<h1>View Task</h1>
 
 <%= render "shared/errors" %>
 <%= render "shared/messages" %>
 
-<h2>Task Title: <%= @task.title %></h2>
-<h3>Task Owner: <%= @task.owner.username %></h3>
-<h3>Task Description:</h3>
+<h2>Task:</h2>
+
+<h3>Title: <%= @task.title %></h3>
+<h3>Owner: <%= @task.owner.username %></h3>
+<h3>Description:</h3>
 <p><%= @task.description %></p>
-<br>
-<h3>Task Type:</h3>
+<h3>Type:</h3>
 <% if @task.private == true %>
   <p>Private</p>
   <% if task_owner %>
@@ -18,7 +18,7 @@
     <%= auth_token %>
     <input type="hidden" name="_method" value="PATCH">
     <input type="hidden" name="task[private]" value="false">
-    <input type="submit" name="submit" value="Public">
+    <input type="submit" name="submit" value="Make Public">
   </form>
   <% end %>
   <% else %>
@@ -28,13 +28,14 @@
     <%= auth_token %>
     <input type="hidden" name="_method" value="PATCH">
     <input type="hidden" name="task[private]" value="true">
-    <input type="submit" name="submit" value="Private">
+    <input type="submit" name="submit" value="Make Private">
   </form>
+
   <% end %>
-  <% end %>
+<% end %>
 
 
-<h3>Task Status:</h3>
+<h3>Status:</h3>
 <% if @task.completed %>
   <p>Completed</p>
   <% if task_owner %>
@@ -42,7 +43,7 @@
     <%= auth_token %>
     <input type="hidden" name="_method" value="PATCH">
     <input type="hidden" name="task[completed]" value="false">
-    <input type="submit" name="submit" value="Incomplete">
+    <input type="submit" name="submit" value="Make Task Ongoing">
   </form>
   <% end %>
 <% else %>
@@ -52,15 +53,23 @@
     <%= auth_token %>
     <input type="hidden" name="_method" value="PATCH">
     <input type="hidden" name="task[completed]" value="true">
-    <input type="submit" name="submit" value="Completed">
+    <input type="submit" name="submit" value="Complete Task">
   </form>
   <% end %>
 <% end %>
-
+<br>
 <% if task_owner %>
   <form action="<%= task_url(@task) %>" method="post">
     <input type="hidden" name="_method" value="DELETE">
     <%= auth_token %>
-    <input type="submit" name="submit" value="delete '<%= @task.title %>' task">
+    <input type="submit" name="submit" value="Delete <%= @task.title %> Task">
   </form>
+  <a href="<%= edit_task_url(@task) %>">Edit Task</a>
+  <br>
 <% end %>
+<br>
+<div class="foot">
+  <a href="<%= tasks_url %>">All Tasks</a>
+  <a href="<%= users_url %>">All Users</a>
+  <a href="<%= user_url(current_user) %>">Your Page</a>
+</div>

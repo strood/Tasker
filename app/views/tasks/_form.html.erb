@@ -33,9 +33,10 @@
 
   <br>
 
-  <label for="completed">Completed?:</label>
+  <label for="completed">Completed?:
     <input type="checkbox" name="task[completed]"
     <%= 'checked="true"' if task.completed %>>
+  </label>
   <br>
 
   <input type="submit" value="<%= button_text %>">
