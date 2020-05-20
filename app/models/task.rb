@@ -19,6 +19,9 @@ class Task < ApplicationRecord
     foreign_key: :user_id,
     class_name: :User
 
+  has_many :comments,
+        as: :imageable
+
   def self.find_by_user_id(id)
     @tasks = Task.find_by(user_id: id)
     return nil unless @tasks
