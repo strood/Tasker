@@ -18,6 +18,9 @@ class UsersController < ApplicationController
     if !User.pass_valid?(params[:user][:password])
       flash[:errors] = ["Password must be at least 6 characters long"]
       render :new
+    elsif User.find_by(username: params[:user][:username])
+      flash[:errors] = ["Sorry, that username is taken, please try another"]
+      render :new
     elsif @user.save
       login!(@user)
       flash[:notice] = ["Hello, #{ @user.username }, welcome to Tasker!"]

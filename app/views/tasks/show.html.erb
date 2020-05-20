@@ -7,7 +7,7 @@
 <h2>Task:</h2>
 
 <h3>Title: <%= @task.title %></h3>
-<h3>Owner: <%= @task.owner.username %></h3>
+<h3>Owner: <a href="<%= user_url(@task.owner) %>"><%= @task.owner.username %></a></h3>
 <h3>Description:</h3>
 <p><%= @task.description %></p>
 <h3>Type:</h3>

@@ -16,9 +16,13 @@
 
   <ul>
     <% @user.tasks.each do |task| %>
-    <li>
-      <%= task.title %>
-      <%= task.description %>
+    <li class="task-li">
+      <h3>
+        <%= task.title %>
+      </h3>
+      <p>
+      ---  <%= task.description %>
+      </p>
       <% if task.private == true %>
         <p>Private</p>
         <form action="<%= task_url(task) %>" method="post">
@@ -71,7 +75,7 @@
 
   <ul>
     <% Task.find_public_by_user_id(@user.id).each do |task| %>
-    <li>
+    <li class="task-li">
       <a href="<%= task_url(task) %>">
         <%= task.title %>
       </a>
