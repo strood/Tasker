@@ -8,6 +8,7 @@
 #  imageable_id   :bigint
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  owner_id       :bigint           not null
 #
 FactoryBot.define do
   factory :comment do

@@ -7,5 +7,7 @@ Rails.application.routes.draw do
 
   resources :tasks
 
+  resources :comments, only: [:create]
+
   root to: redirect('/session/new')
 end

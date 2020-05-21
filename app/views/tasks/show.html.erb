@@ -3,70 +3,89 @@
 
 <%= render "shared/errors" %>
 <%= render "shared/messages" %>
+<div class="task-display">
+  <h2>Task:</h2>
 
-<h2>Task:</h2>
+  <h3>Title: <%= @task.title %></h3>
+  <h3>Owner: <a href="<%= user_url(@task.owner) %>"><%= @task.owner.username %></a></h3>
 
-<h3>Title: <%= @task.title %></h3>
-<h3>Owner: <a href="<%= user_url(@task.owner) %>"><%= @task.owner.username %></a></h3>
-<h3>Description:</h3>
-<p><%= @task.description %></p>
-<h3>Type:</h3>
-<% if @task.private == true %>
-  <p>Private</p>
-  <% if task_owner %>
-  <form action="<%= task_url(@task) %>" method="post">
-    <%= auth_token %>
-    <input type="hidden" name="_method" value="PATCH">
-    <input type="hidden" name="task[private]" value="false">
-    <input type="submit" name="submit" value="Make Public">
-  </form>
+  <h3>Description:</h3>
+  <p><%= @task.description %></p>
+
+  <h3>Type:</h3>
+  <% if @task.private == true %>
+    <p>Private</p>
+    <% if task_owner %>
+    <form action="<%= task_url(@task) %>" method="post">
+      <%= auth_token %>
+      <input type="hidden" name="_method" value="PATCH">
+      <input type="hidden" name="task[private]" value="false">
+      <input type="submit" name="submit" value="Make Public">
+    </form>
+    <% end %>
+    <% else %>
+    <p>Public</p>
+    <% if task_owner %>
+    <form action="<%= task_url(@task) %>" method="post">
+      <%= auth_token %>
+      <input type="hidden" name="_method" value="PATCH">
+      <input type="hidden" name="task[private]" value="true">
+      <input type="submit" name="submit" value="Make Private">
+    </form>
+
+    <% end %>
   <% end %>
+
+
+  <h3>Status:</h3>
+  <% if @task.completed %>
+    <p>Completed</p>
+    <% if task_owner %>
+    <form action="<%= task_url(@task) %>" method="post">
+      <%= auth_token %>
+      <input type="hidden" name="_method" value="PATCH">
+      <input type="hidden" name="task[completed]" value="false">
+      <input type="submit" name="submit" value="Make Task Ongoing">
+    </form>
+    <% end %>
   <% else %>
-  <p>Public</p>
-  <% if task_owner %>
-  <form action="<%= task_url(@task) %>" method="post">
-    <%= auth_token %>
-    <input type="hidden" name="_method" value="PATCH">
-    <input type="hidden" name="task[private]" value="true">
-    <input type="submit" name="submit" value="Make Private">
-  </form>
-
+    <p>Ongoing</p>
+    <% if task_owner %>
+    <form action="<%= task_url(@task) %>" method="post">
+      <%= auth_token %>
+      <input type="hidden" name="_method" value="PATCH">
+      <input type="hidden" name="task[completed]" value="true">
+      <input type="submit" name="submit" value="Complete Task">
+    </form>
+    <% end %>
   <% end %>
-<% end %>
-
-
-<h3>Status:</h3>
-<% if @task.completed %>
-  <p>Completed</p>
-  <% if task_owner %>
-  <form action="<%= task_url(@task) %>" method="post">
-    <%= auth_token %>
-    <input type="hidden" name="_method" value="PATCH">
-    <input type="hidden" name="task[completed]" value="false">
-    <input type="submit" name="submit" value="Make Task Ongoing">
-  </form>
-  <% end %>
-<% else %>
-  <p>Ongoing</p>
-  <% if task_owner %>
-  <form action="<%= task_url(@task) %>" method="post">
-    <%= auth_token %>
-    <input type="hidden" name="_method" value="PATCH">
-    <input type="hidden" name="task[completed]" value="true">
-    <input type="submit" name="submit" value="Complete Task">
-  </form>
-  <% end %>
-<% end %>
-<br>
-<% if task_owner %>
-  <form action="<%= task_url(@task) %>" method="post">
-    <input type="hidden" name="_method" value="DELETE">
-    <%= auth_token %>
-    <input type="submit" name="submit" value="Delete <%= @task.title %> Task">
-  </form>
-  <a href="<%= edit_task_url(@task) %>">Edit Task</a>
   <br>
-<% end %>
+
+  <div class="owner-options">
+
+  <% if task_owner %>
+    <form action="<%= task_url(@task) %>" method="post">
+      <input type="hidden" name="_method" value="DELETE">
+      <%= auth_token %>
+      <input type="submit" name="submit" value="Delete <%= @task.title %> Task">
+    </form>
+    <a href="<%= edit_task_url(@task) %>">Edit Task</a>
+  </div>
+
+    <br>
+  <% end %>
+
+  <div class="comment-box">
+    <label for="comment">Comment:
+      <textarea name="comment" rows="8" cols="80"></textarea>
+
+    </label>
+    <form class="" action="index.html" method="post">
+        <%= auth_token %>
+        <input type="submit" name="submit" value="Add Comment">
+    </form>
+  </div>
+</div>
 <br>
 <div class="foot">
   <a href="<%= tasks_url %>">All Tasks</a>
