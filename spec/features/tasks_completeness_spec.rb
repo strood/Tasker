@@ -37,14 +37,14 @@ feature "task completeness tracking" do
     context "on the task show page" do
       scenario "allows user to change task to completed" do
         visit task_url(hw_task)
-        click_button "Completed"
+        click_button "Complete Task"
         expect(page).to have_content("Complete")
       end
 
       scenario "redirects to the same page after updating task" do
         visit task_url(hw_task)
-        click_button "Completed"
-        expect(page).to have_content("Task Title:")
+        click_button "Complete Task"
+        expect(page).to have_content("Task:")
         expect(page).to have_content("Title")
         expect(page).to have_content(hw_task.title)
       end
@@ -61,13 +61,13 @@ feature "task completeness tracking" do
     context "on the task index page" do
       scenario "allows user to change task to completed" do
         visit tasks_url
-        click_button "Completed"
+        click_button "Complete Task"
         expect(page).to have_content("Complete")
       end
 
       scenario "redirects to the same page after updating task" do
         visit tasks_url
-        click_button "Completed"
+        click_button "Complete Task"
         expect(page).to have_content("All Tasks")
       end
     end
@@ -75,16 +75,16 @@ feature "task completeness tracking" do
     context "on the users profile page" do
       scenario "allows user to change task to completed" do
         visit user_url(hello_world)
-        click_button "Completed"
+        click_button "Complete Task"
         expect(page).to have_content("Complete")
       end
 
       scenario "redirects to the same page after updating task" do
         visit user_url(hello_world)
-        click_button "Completed"
+        click_button "Complete Task"
         expect(page).to have_content("Complete")
-        expect(page).to have_content("Hello, hello_world")
-        expect(page).to have_content("Your Tasks:")
+        expect(page).to have_content("Welcome, hello_world")
+        expect(page).to have_content("hello_world's Tasks:")
       end
 
       scenario "disallows editing completeness when it is not your task" do

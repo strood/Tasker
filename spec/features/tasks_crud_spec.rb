@@ -47,7 +47,7 @@ feature "CRUD of tasks" do
       visit edit_task_url(task)
       fill_in "Title", with: "visit the sun"
       click_button "Update Task"
-      expect(page).not_to have_content "Edit Task"
+      expect(page).not_to have_content "Update Task!"
       expect(page).to have_content "visit the sun"
       expect(page).to have_content "Task updated!"
     end
@@ -58,7 +58,7 @@ feature "CRUD of tasks" do
     scenario "should allow the deletion of a task" do
       make_three_tasks(hello_world)
       visit tasks_url
-      click_button "delete 'kick the can' task"
+      click_button "Delete kick the can Task"
       expect(page).not_to have_content "kick the can"
       expect(page).to have_content "Task deleted!"
     end
