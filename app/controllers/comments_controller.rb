@@ -4,7 +4,6 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.owner_id = current_user.id
 
-
     if @comment.save
       flash[:notice] = ["Comment Saved"]
 
@@ -14,8 +13,6 @@ class CommentsController < ApplicationController
     end
     redirect_back fallback_location: users_url
   end
-
-
 
   private
 
