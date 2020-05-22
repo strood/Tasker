@@ -4,7 +4,7 @@ feature "commenting" do
 
   given!(:hello_world) { FactoryBot.create(:user_hw) }
   given!(:foo_bar) { FactoryBot.create(:user, username: "foo_bar") }
-  given!(:foo_task) { FactoryBot.create(:task, owner: foo_bar) }
+  given!(:foo_task) { FactoryBot.create(:task, user_id: foo_bar.id) }
 
   background(:each) do
     login_as(hello_world)
@@ -17,12 +17,13 @@ feature "commenting" do
   shared_examples "comment" do
     scenario "should have a form for adding a new comment" do
       expect(page).to have_content "Comment"
-      expect(page).to have_field "comment"
+      expect(page).to have_field "comment[content]"
     end
 
     scenario "Should save the comment when a user submits one" do
       fill_in "Comment", with: "My dapper looking comment for testing!"
       click_on "Add Comment"
+
       expect(page).to have_content "My dapper looking comment for testing!"
     end
   end

@@ -5,6 +5,29 @@
 
 <h2><%= @user.username %>'s Profile</h2>
 
+<div class="comment-box">
+
+  <form class="" action="<%= comments_url %>" method="post">
+    <%= auth_token %>
+     <input type="hidden" name="comment[imageable_id]" value="<%= @user.id %>">
+     <input type="hidden" name="comment[imageable_type]" value="<%= User %>">
+
+    <label for="comment">Comment:
+      <textarea name="comment[content]" rows="8" cols="80"></textarea>
+
+    </label>
+        <input type="submit" name="submit" value="Add Comment">
+  </form>
+
+  <div class="comment-display">
+      <% @user.comments.each do |comment| %>
+        <p>
+          <%= comment.content %>
+        </p>
+      <% end %>
+  </div>
+</div>
+
 <br>
 <% if themself %>
   <a href="<%= new_task_url %>">New Task</a>

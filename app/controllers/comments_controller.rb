@@ -2,13 +2,16 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
-    @comment.owner_id = current_user.id
+    @comment.user_id = current_user.id
+
+    # render json: @comment
 
     if @comment.save
       flash[:notice] = ["Comment Saved"]
 
     else
       flash[:errors] = @comment.errors.full_messages
+
 
     end
     redirect_back fallback_location: users_url

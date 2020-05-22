@@ -8,7 +8,7 @@
 #  imageable_id   :bigint
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  owner_id       :bigint           not null
+#  user_id        :bigint           default(1), not null
 #
 require 'rails_helper'
 
@@ -32,13 +32,13 @@ RSpec.describe Comment, type: :model do
 
   subject(:user) { User.new(username: "Frank", session_token: "123456", password_digest: "aabbccddeeff", password: "good_password") }
 
-  subject(:comment) { Comment.new(imageable_type: "User", imageable_id: user.id, content: "My cool test comment about frank!", owner_id: 1) }
+  subject(:comment) { Comment.new(imageable_type: "User", imageable_id: user.id, content: "My cool test comment about frank!") }
 
 
 
   describe "validations" do
     it { should validate_presence_of(:content) }
-    it { should validate_presence_of(:owner_id) }
+    it { should validate_presence_of(:user_id) }
     it { should belong_to(:imageable) }
 
 

@@ -8,15 +8,18 @@
 #  imageable_id   :bigint
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  owner_id       :bigint           not null
+#  user_id        :bigint           default(1), not null
 #
 class Comment < ApplicationRecord
-  attr_accessor :owner_id
+  attr_accessor :user_id
 
-  validates :content, :owner_id, presence: true
+  validates :content, :user_id, presence: true
 
   belongs_to :imageable,
       polymorphic: true
 
-  belongs_to :writer
+  belongs_to :user,
+    primary_key: :id,
+    foreign_key: :user_id,
+    class_name: :User
 end
